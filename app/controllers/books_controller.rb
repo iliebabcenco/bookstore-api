@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
     render :json => Book.all
   end
@@ -7,11 +8,15 @@ class BooksController < ApplicationController
     @book = Book.new
   end
 
+  def show
+    render :json => Book.find(params[:id])
+  end
+
   def create
     if Book.create!(books_params)
-      "Succesfuly created!"
+      render json: "Succesfuly created!"
     else
-      "Error!"
+      render json: "Error!"
     end
   end
 
@@ -21,19 +26,20 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.update(book_params)
-      "Succesfuly destroyed!"
+    if @book.update(books_params)
+      render json: 'success'
+
     else
-      "Error!"
+      render json: "Error!"
     end
   end
 
   def destroy
     @book = Book.find(params[:id])
     if @book.destroy
-      "Succesfuly destroyed!"
+      render :json =>@book
     else
-      "Error!"
+      render :json =>"Error!"
     end
   end
 
