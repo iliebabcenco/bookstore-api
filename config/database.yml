@@ -7,16 +7,16 @@ development:
   <<: *default
   database: bookstore_api_development
   username: postgres
-  password: 456321
+  password: 123456
 
 test:
   <<: *default
   database: bookstore_api_test
   username: postgres
-  password: 456321
+  password: 123456
 
 production:
   <<: *default
   database: bookstore_api_production
   username: postgres
-  password: 456321
+  password: 123456
